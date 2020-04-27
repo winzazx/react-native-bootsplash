@@ -39,24 +39,17 @@ public class RNBootSplash {
 
         mIsVisible = true;
 
-        Context context = activity.getApplicationContext();
-        LinearLayout layout = new LinearLayout(context);
+        View layout = activity.getLayoutInflater().inflate(mDrawableResId, null, false);
+        layout.setId(R.id.bootsplash_layout_id);
         LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-        View view = new View(context);
         int roundedDuration = duration.intValue();
 
-        view.setBackgroundResource(mDrawableResId);
-        layout.setId(R.id.bootsplash_layout_id);
-        layout.setLayoutTransition(null);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        layout.addView(view, params);
 
         if (roundedDuration <= 0) {
           activity.addContentView(layout, params);
         } else {
           layout.setAlpha(0.0f);
           activity.addContentView(layout, params);
-
           layout
               .animate()
               .setDuration(roundedDuration)
@@ -78,7 +71,7 @@ public class RNBootSplash {
 
         mIsVisible = false;
 
-        final LinearLayout layout = activity.findViewById(R.id.bootsplash_layout_id);
+        final View layout = activity.findViewById(R.id.bootsplash_layout_id);
 
         if (layout == null) {
           return;
